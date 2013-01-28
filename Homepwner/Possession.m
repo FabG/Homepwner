@@ -11,6 +11,7 @@
 @implementation Possession
 
 @synthesize possessionName, serialNumber, valueInDollars, dateCreated;
+@synthesize imageKey;
 
 /* Using properties so commenting out getter/setter
 // possessionName Setter / Getter

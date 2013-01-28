@@ -14,7 +14,9 @@
     NSString *serialNumber;
     int valueInDollars;
     NSDate *dateCreated;
+    NSString *imageKey;
 }
+@property (nonatomic, copy) NSString *imageKey;
 
 // Convenience Class Method to create a random instance for test purpose
 + (id)randomPossession;
