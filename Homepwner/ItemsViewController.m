@@ -125,6 +125,23 @@
     [[self tableView] reloadData];
 }
 
+// Implement protocol  from UITableViewDataSource protocol:
+// tableView:commitEditingStyle:forRowAtIndexPath:
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // If the table view is asking to commit a delete command...
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        PossessionStore *ps = [PossessionStore defaultStore];
+        NSArray *possessions = [ps allPossessions];
+        Possession *p = [possessions objectAtIndex:[indexPath row]];
+        [ps removePossession:p];
+        // We also remove that row from the table view with an animation
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                         withRowAnimation:YES];
+    } }
 
 
 @end
