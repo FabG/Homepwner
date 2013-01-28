@@ -17,12 +17,14 @@
     // Call the superclass's designated initializer
     self = [super initWithStyle:UITableViewStyleGrouped];
     
+    /* Commenting out as we can add the possessions one by one
     // Add 10 random possessions to the PossessionStore.
     if (self) {
         for (int i = 0; i < 10; i++) {
             [[PossessionStore defaultStore] createPossession];
         }
     }
+     */
     
     return self;
 }
@@ -113,6 +115,16 @@
         [self setEditing:YES animated:YES];
     }
 }
+
+// Implement the action method for the New button so that a new random
+// Possession is added to the store and the table is reloaded.
+- (IBAction)addNewPossession:(id)sender
+{
+    [[PossessionStore defaultStore] createPossession];
+    // tableView returns the controller's view
+    [[self tableView] reloadData];
+}
+
 
 
 @end
