@@ -67,4 +67,52 @@
     return cell;
 }
 
+// Load a XIB file manually with NSBundle. This class is the interface between an
+// application and the application bundle it lives in.
+// Implement headerView.
+- (UIView *)headerView
+{
+    // If we haven't loaded the headerView yet...
+    if (!headerView) {
+        // Load HeaderView.xib (self as owner of the XIB file places the instance
+        // of ItemsViewController as the File's Owner of the XIB file
+        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
+    }
+    return headerView;
+}
+
+
+// Make the XIB header view of the table
+
+// The first time tableView:heightForHeaderInSection: is sent to
+// ItemsViewController, it sends itself the message headerView. At this time,
+// headerView will be nil, which causes headerView to be loaded from the XIB file
+- (UIView *)tableView:(UITableView *)tv viewForHeaderInSection:(NSInteger)sec
+{
+    return [self headerView];
+}
+
+- (CGFloat)tableView:(UITableView *)tv heightForHeaderInSection:(NSInteger)sec
+{
+    return [[self headerView] bounds].size.height;
+}
+
+// Implement both button actions
+- (void)toggleEditingMode:(id)sender
+{
+    // If we are currently in editing mode...
+    if ([self isEditing]) {
+        // Change text of button to inform user of state
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        // Turn off editing mode
+        [self setEditing:NO animated:YES];
+    } else {
+        // Change text of button to inform user of state
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        // Enter editing mode
+        [self setEditing:YES animated:YES];
+    }
+}
+
+
 @end
