@@ -20,8 +20,17 @@
     // Create a ItemsViewController instance
     ItemsViewController *itemsViewController = [[ItemsViewController alloc] init];
     
+    // Create an instance of a UINavigationController
+    // its stack contains only itemsViewController
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:itemsViewController];
+
+    /* Using the Navigation controller instead
     // Place ItemsViewController's table view in the window hierarchy
     [[self window] setRootViewController:itemsViewController];
+    */
+
+    // Place navigation controller's view in the window hierarchy
+    [[self window] setRootViewController:navController];
     
     [self.window makeKeyAndVisible];
     return YES;

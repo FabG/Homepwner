@@ -26,6 +26,27 @@
     }
      */
     
+    // Give Homepwner a UINavigationBar with a button
+    // When tapped, it will add a new Possession to the list.
+    if (self) {
+        // Create a new bar button item that will send
+        // addNewPossession: to ItemsViewController
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                target:self
+                                action:@selector(addNewPossession:)];
+        
+        // Set this bar button item as the right item in the navigationItem
+        [[self navigationItem] setRightBarButtonItem:bbi];
+
+        // Set the title of the navigation item
+        [[self navigationItem] setTitle:@"Homepwner"];
+        
+        // Replace the Edit button in the table view header with a
+        // UIBarButtonItem.
+        [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
+    }
+    
     return self;
 }
 
@@ -86,6 +107,7 @@
 
 // Make the XIB header view of the table
 
+/* Commenting out this section as we add th edit and + buttons to navigation bar
 // The first time tableView:heightForHeaderInSection: is sent to
 // ItemsViewController, it sends itself the message headerView. At this time,
 // headerView will be nil, which causes headerView to be loaded from the XIB file
@@ -98,6 +120,7 @@
 {
     return [[self headerView] bounds].size.height;
 }
+
 
 // Implement both button actions
 - (void)toggleEditingMode:(id)sender
@@ -115,6 +138,7 @@
         [self setEditing:YES animated:YES];
     }
 }
+ */
 
 // Implement the action method for the New button so that a new random
 // Possession is added to the store and the table is reloaded.
