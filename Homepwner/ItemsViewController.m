@@ -120,6 +120,7 @@
 {
     return [[self headerView] bounds].size.height;
 }
+ */
 
 
 // Implement both button actions
@@ -138,7 +139,7 @@
         [self setEditing:YES animated:YES];
     }
 }
- */
+ 
 
 // Implement the action method for the New button so that a new random
 // Possession is added to the store and the table is reloaded.
@@ -178,5 +179,27 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
     [[PossessionStore defaultStore] movePossessionAtIndex:[fromIndexPath row]
                                                   toIndex:[toIndexPath row]];
 }
+
+// When a row is tapped, its delegate is sent tableView:didSelectRowAtIndexPath:,
+// which contains the index path of the selected row.
+// Implement this method to allocate a ItemDetailViewController and then push it on top of
+// the navigation controller’s stack.
+- (void)tableView:(UITableView *)aTableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ItemDetailViewController *detailViewController =
+    [[ItemDetailViewController alloc] init];
+    
+    NSArray *possessions = [[PossessionStore defaultStore] allPossessions];
+    
+    // Give detail view controller a pointer to the possession object in row
+    [detailViewController setPossession:
+     [possessions objectAtIndex:[indexPath row]]];
+    
+    // Push it onto the top of the navigation controller's stack
+    [[self navigationController] pushViewController:detailViewController
+                                           animated:YES];
+}
+
 
 @end
