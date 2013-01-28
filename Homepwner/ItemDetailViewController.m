@@ -47,5 +47,17 @@
     [[self navigationItem] setTitle:[possession possessionName]];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Clear first responder - resign  first responder status - keyboard to be dismissed. 
+    [[self view] endEditing:YES];
+    
+    // "Save" changes to possession
+    [possession setPossessionName:[nameField text]];
+    [possession setSerialNumber:[serialNumberField text]];
+    [possession setValueInDollars:[[valueField text] intValue]];
+}
 
 @end

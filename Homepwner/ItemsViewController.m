@@ -201,5 +201,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                            animated:YES];
 }
 
+// reload  UITableView so the user can see the changes from the detailled edit view
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[self tableView] reloadData];
+}
 
 @end
