@@ -125,6 +125,7 @@
     [[self tableView] reloadData];
 }
 
+// DELETE ROWS
 // Implement protocol  from UITableViewDataSource protocol:
 // tableView:commitEditingStyle:forRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView
@@ -141,7 +142,17 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         // We also remove that row from the table view with an animation
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                          withRowAnimation:YES];
-    } }
+    }
+}
 
+// MOVE ROWS
+// Implement tableView:moveRowAtIndexPath:toIndexPath: to update the store.
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+      toIndexPath:(NSIndexPath *)toIndexPath
+{
+    [[PossessionStore defaultStore] movePossessionAtIndex:[fromIndexPath row]
+                                                  toIndex:[toIndexPath row]];
+}
 
 @end

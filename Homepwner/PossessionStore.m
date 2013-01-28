@@ -69,5 +69,21 @@ static PossessionStore *defaultStore = nil;
     [allPossessions removeObjectIdenticalTo:p];
 }
 
+- (void)movePossessionAtIndex:(int)from
+                      toIndex:(int)to
+{
+    if (from == to) {
+        return; }
+    // Get pointer to object being moved
+    Possession *p = [allPossessions objectAtIndex:from];
+    // Retain it... (retain count of p = 2)
+
+    [allPossessions removeObjectAtIndex:from];
+    
+    // Insert p in array at new location, retained by array (retain count of p = 2)
+    [allPossessions insertObject:p atIndex:to];
+
+}
+
 
 @end
