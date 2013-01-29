@@ -101,9 +101,14 @@
 // and display them in the cell.
 - (void)setPossession:(Possession *)possession
 {
+    // NSCode: get the currency symbol
+    NSString *currencySymbol = [[NSLocale currentLocale]
+                                objectForKey:NSLocaleCurrencySymbol];
+    
     // Using a Possession instance, we can set the values of the subviews
     [valueLabel setText:
-        [NSString stringWithFormat:@"$%@", [possession valueInDollars]]];
+        [NSString stringWithFormat:@"%@%@", currencySymbol, [possession valueInDollars]]];
+    
     [nameLabel setText:[possession possessionName]];
     
     // use this thumbnail to set the imageView of the cells when they are configured

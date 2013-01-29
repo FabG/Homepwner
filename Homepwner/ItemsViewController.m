@@ -39,9 +39,11 @@
         
         // Set this bar button item as the right item in the navigationItem
         [[self navigationItem] setRightBarButtonItem:bbi];
-
+        [bbi release];
+        
         // Set the title of the navigation item
-        [[self navigationItem] setTitle:@"Homepwner"];
+        [[self navigationItem] setTitle:
+         NSLocalizedString(@"Homepwner", @"Name of application")];
         
         // Replace the Edit button in the table view header with a
         // UIBarButtonItem.
