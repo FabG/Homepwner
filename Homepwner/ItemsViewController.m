@@ -9,6 +9,7 @@
 #import "ItemsViewController.h"
 #import "PossessionStore.h"
 #import "Possession.h"
+#import "HomepwnerItemCell.h"
 
 @implementation ItemsViewController
 
@@ -69,6 +70,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /* Commenting out as we ar enow using Images & HomepwnerItemCells
     // Check for a reusable cell first, use that if it exists
     UITableViewCell *cell =
     [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
@@ -86,6 +88,25 @@
     Possession *p = [[[PossessionStore defaultStore] allPossessions]
                      objectAtIndex:[indexPath row]];
     [[cell textLabel] setText:[p description]];
+     */
+    
+    // Get instance of a HomepwnerItemCell - either an unused one or a new one.
+    // The method returns a UITableViewCell; we typecast it as a HomepwnerItemCell.
+    HomepwnerItemCell *cell = (HomepwnerItemCell *)[tableView
+                                dequeueReusableCellWithIdentifier:@"HomepwnerItemCell"];
+    
+    if (!cell) {
+        cell = [[[HomepwnerItemCell alloc]
+                 initWithStyle:UITableViewCellStyleDefault
+                 reuseIdentifier:@"HomepwnerItemCell"] autorelease];
+    }
+    
+    NSArray *possessions = [[PossessionStore defaultStore] allPossessions];
+    Possession *p = [possessions objectAtIndex:[indexPath row]];
+    
+    // Instead of setting each label directly, we pass it a possession object
+    // it knows how to configure its own subviews
+    [cell setPossession:p];
     
     return cell;
 }

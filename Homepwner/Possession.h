@@ -15,18 +15,18 @@
     int valueInDollars;
     NSDate *dateCreated;
     NSString *imageKey;
+    UIImage *thumbnail;
+    NSData *thumbnailData;
 }
-@property (nonatomic, copy) NSString *imageKey;
 
 // Convenience Class Method to create a random instance for test purpose
 + (id)randomPossession;
 
-// Initializer
-// The Possession class has four instance variables, but only three are writeable.
-// Therefore, Possession’s designated initializer needs to accept three arguments.
-- (id)initWithPossessionName:(NSString *)name
-              valueInDollars:(int)value
-                serialNumber:(NSString *)sNumber;
+// Return the desired thumbnail size
++ (CGSize)thumbnailSize;
+
+@property (nonatomic, copy) NSString *imageKey;
+@property (readonly) UIImage *thumbnail;
 
 // The generated accessor methods for this property will be a getter
 // and a setter that retains the incoming object and releases the old object.
@@ -37,6 +37,18 @@
 @property (nonatomic) int valueInDollars;
 // The only generated accessor method for this property will be a getter.
 @property (nonatomic, readonly) NSDate *dateCreated;
+
+
+// Initializer
+// The Possession class has four instance variables, but only three are writeable.
+// Therefore, Possession’s designated initializer needs to accept three arguments.
+- (id)initWithPossessionName:(NSString *)name
+              valueInDollars:(int)value
+                serialNumber:(NSString *)sNumber;
+
+// Method to turn a full-sized image into a thumbnail
+- (void)setThumbnailDataFromImage:(UIImage *)image;
+
 
 /* No need for Getters/Steers with use of properties
 // Getters and setters

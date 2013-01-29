@@ -152,7 +152,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSLog(@"didFinishPickingMediaWithInfo");
+    NSLog(@"Picture taken (didFinishPickingMediaWithInfo)");
     NSString *oldKey = [possession imageKey];
     
     // Did the possession already have an image?
@@ -184,6 +184,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     // Put that image onto the screen in our image view
     [imageView setImage:image];
+    
+    // Create a thumbnail of the picture
+    [possession setThumbnailDataFromImage:image];
     
     // Take image picker off the screen
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

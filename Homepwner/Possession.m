@@ -101,13 +101,13 @@
 + (id)randomPossession
 {
     // Create an array of three adjectives
-    NSArray *randomAdjectiveList = [NSArray arrayWithObjects:@"Meant",
-                                    @"Good condition",
-                                    @"Average condition", nil];
+    NSArray *randomAdjectiveList = [NSArray arrayWithObjects:@"Mint",
+                                    @"Shiny",
+                                    @"Rusty", nil];
     // Create an array of three nouns
-    NSArray *randomNounList = [NSArray arrayWithObjects:@"Small Item",
-                               @"Medium Item",
-                               @"Large Item", nil];
+    NSArray *randomNounList = [NSArray arrayWithObjects:@"Bike",
+                               @"Computer",
+                               @"TV stand", nil];
     
     // Get the index of a random adjective/noun from the lists
     // Note: The % operator, called the modulo operator, gives
@@ -134,6 +134,13 @@
     return newPossession;
 }
 
+// Class method that returns the size of a thumbnail
++ (CGSize)thumbnailSize
+{
+    return CGSizeMake(40, 40);
+}
+
+
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     // For each instance variable, archive it under its variable name
@@ -147,6 +154,8 @@
     // For the primitive valueInDollars, make sure to use encodeInt:forKey:
     // the value in valueInDollars will be placed in the coder object
     [encoder encodeInt:valueInDollars forKey:@"valueInDollars"];
+    
+    [encoder encodeObject:thumbnailData forKey:@"thumbnailData"];
 }
 
 
@@ -164,8 +173,93 @@
         // dateCreated is read only, we have no setter. We explicitly
         // retain it and set our instance variable pointer to it
         dateCreated = [[decoder decodeObjectForKey:@"dateCreated"] retain];
+        
+        thumbnailData = [[decoder decodeObjectForKey:@"thumbnailData"] retain];
     }
     return self;
+}
+
+// Getter method for thumbnail that will create it from the data if necessary
+- (UIImage *)thumbnail
+{
+    // Am I imageless?
+    if (!thumbnailData) {
+        return nil; }
+    // Is there no cached thumbnail image?
+    if (!thumbnail) {
+        // Create the image from the data
+        thumbnail = [[UIImage imageWithData:thumbnailData] retain];
+    }
+    return thumbnail;
+}
+
+- (void)dealloc
+{
+    [thumbnail release];
+    [thumbnailData release];
+    [possessionName release];
+    [serialNumber release];
+    [dateCreated release];
+    [imageKey release];
+    [super dealloc];
+}
+
+// Following methods create a thumbnail using an offscreen context.
+// Private setter
+- (void)setThumbnail:(UIImage *)image
+{
+    [image retain];
+    [thumbnail release];
+    thumbnail = image;
+}
+
+// Private setter
+- (void)setThumbnailData:(NSData *)d
+{
+    [d retain];
+    [thumbnailData release];
+    thumbnailData = d;
+}
+
+- (void)setThumbnailDataFromImage:(UIImage *)image
+{
+    CGSize origImageSize = [image size];
+    CGRect newRect;
+    newRect.origin = CGPointZero;
+    newRect.size = [[self class] thumbnailSize];
+    
+    // How do we scale the image?
+    float ratio = MAX(newRect.size.width/origImageSize.width,
+                      newRect.size.height/origImageSize.height);
+    
+    // Create a bitmap image context
+    UIGraphicsBeginImageContext(newRect.size);
+    
+    // Round the corners
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newRect
+                                                    cornerRadius:5.0];
+    [path addClip];
+    
+    // Into what rectangle shall I composite the image?
+    CGRect projectRect;
+    projectRect.size.width = ratio * origImageSize.width;
+    projectRect.size.height = ratio * origImageSize.height;
+    projectRect.origin.x = (newRect.size.width - projectRect.size.width) / 2.0;
+    projectRect.origin.y = (newRect.size.height - projectRect.size.height) / 2.0;
+    
+    // Draw the image on it
+    [image drawInRect:projectRect];
+    
+    // Get the image from the image context, retain it as our thumbnail
+    UIImage *small = UIGraphicsGetImageFromCurrentImageContext();
+    [self setThumbnail:small];
+    
+    // Get the image as a PNG data
+    NSData *data = UIImagePNGRepresentation(small);
+    [self setThumbnailData:data];
+    
+    // Cleanup image contex resources, we're done
+    UIGraphicsEndImageContext();
 }
 
 @end
