@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ItemDetailViewController.h"
+#import "ItemDetailViewController.h"
 
-@interface ItemsViewController : UITableViewController
+@interface ItemsViewController : UITableViewController <ItemDetailViewControllerDelegate>
 {
     IBOutlet UIView *headerView;
 }

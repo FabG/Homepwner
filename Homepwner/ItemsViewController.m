@@ -128,11 +128,13 @@
 {
     // If we are currently in editing mode...
     if ([self isEditing]) {
+        NSLog(@"EDIT Mode = ON");
         // Change text of button to inform user of state
         [sender setTitle:@"Edit" forState:UIControlStateNormal];
         // Turn off editing mode
         [self setEditing:NO animated:YES];
     } else {
+        NSLog(@"EDIT Mode = OFF");
         // Change text of button to inform user of state
         [sender setTitle:@"Done" forState:UIControlStateNormal];
         // Enter editing mode
@@ -145,9 +147,31 @@
 // Possession is added to the store and the table is reloaded.
 - (IBAction)addNewPossession:(id)sender
 {
+    /* Before ading the modal screens
     [[PossessionStore defaultStore] createPossession];
     // tableView returns the controller's view
     [[self tableView] reloadData];
+     */
+    
+    // method to create an instance of ItemDetailViewController in a UINavigationController
+    // and present the navigation controller modally
+    Possession *newPossession = [[PossessionStore defaultStore] createPossession];
+    ItemDetailViewController *detailViewController =
+    [[ItemDetailViewController alloc] initForNewItem:YES];
+    
+    [detailViewController setDelegate:self];
+    [detailViewController setPossession:newPossession];
+    
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:detailViewController];
+    
+    // method to change the presentation style of the UINavigationController that is being presented.
+    [navController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    // navController is retained by self when presented
+    [self presentModalViewController:navController animated:YES];
+    
 }
 
 // DELETE ROWS
@@ -160,6 +184,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     // If the table view is asking to commit a delete command...
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
+        NSLog(@"DELETE Possession");
         PossessionStore *ps = [PossessionStore defaultStore];
         NSArray *possessions = [ps allPossessions];
         Possession *p = [possessions objectAtIndex:[indexPath row]];
@@ -176,6 +201,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
       toIndexPath:(NSIndexPath *)toIndexPath
 {
+    NSLog(@"MOVE Possession");
     [[PossessionStore defaultStore] movePossessionAtIndex:[fromIndexPath row]
                                                   toIndex:[toIndexPath row]];
 }
@@ -187,8 +213,15 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 - (void)tableView:(UITableView *)aTableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"didSelectRowAtIndexPath");
+    
+    ItemDetailViewController *detailViewController =
+    [[ItemDetailViewController alloc] initForNewItem:NO];
+    
+    /* Old initializer
     ItemDetailViewController *detailViewController =
     [[ItemDetailViewController alloc] init];
+    */
     
     NSArray *possessions = [[PossessionStore defaultStore] allPossessions];
     
@@ -207,5 +240,22 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     [super viewWillAppear:animated];
     [[self tableView] reloadData];
 }
+
+// Method for iPad so app works in all orientations
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return (io == UIInterfaceOrientationPortrait);
+    }
+}
+
+// implement the method from the delegate protocol to reload the table.
+- (void)itemDetailViewControllerWillDismiss:(ItemDetailViewController *)vc
+{
+    [[self tableView] reloadData];
+}
+
 
 @end

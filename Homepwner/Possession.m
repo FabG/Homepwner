@@ -76,6 +76,7 @@
     
     // Did the superclass's designated initializer succeed?
     if (self) {
+        NSLog(@"Possession created");
         // Give the instance variables initial values
         [self setPossessionName:name];
         [self setSerialNumber:sNumber];
@@ -100,13 +101,13 @@
 + (id)randomPossession
 {
     // Create an array of three adjectives
-    NSArray *randomAdjectiveList = [NSArray arrayWithObjects:@"Fluffy",
-                                    @"Rusty",
-                                    @"Shiny", nil];
+    NSArray *randomAdjectiveList = [NSArray arrayWithObjects:@"Meant",
+                                    @"Good condition",
+                                    @"Average condition", nil];
     // Create an array of three nouns
-    NSArray *randomNounList = [NSArray arrayWithObjects:@"Bear",
-                               @"Spork",
-                               @"Mac", nil];
+    NSArray *randomNounList = [NSArray arrayWithObjects:@"Small Item",
+                               @"Medium Item",
+                               @"Large Item", nil];
     
     // Get the index of a random adjective/noun from the lists
     // Note: The % operator, called the modulo operator, gives
