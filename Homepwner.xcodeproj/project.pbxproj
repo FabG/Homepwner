@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B02C27216B62D41007D754C /* Possession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B02C27116B62D41007D754C /* Possession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B02C27416B6B2F0007D754C /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B02C27316B6B2F0007D754C /* HeaderView.xib */; };
 		1B02C27816B6F4F3007D754C /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B02C27616B6F4F3007D754C /* ItemDetailViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B02C27916B6F4F3007D754C /* ItemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B02C27716B6F4F3007D754C /* ItemDetailViewController.xib */; };
-		1B02C27C16B70FAC007D754C /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B02C27B16B70FAC007D754C /* ImageStore.m */; };
+		1B02C27C16B70FAC007D754C /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B02C27B16B70FAC007D754C /* ImageStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B02C28516B73A64007D754C /* Pwner_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B02C27F16B73A64007D754C /* Pwner_72x72.png */; };
 		1B02C28616B73A64007D754C /* Pwner_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B02C28016B73A64007D754C /* Pwner_114x114.png */; };
 		1B02C28716B73A64007D754C /* Pwner_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B02C28116B73A64007D754C /* Pwner_144x144.png */; };
@@ -26,19 +25,21 @@
 		1B07762816B6245D002CD95A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B07762716B6245D002CD95A /* CoreGraphics.framework */; };
 		1B07762E16B6245D002CD95A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B07762C16B6245D002CD95A /* InfoPlist.strings */; };
 		1B07763016B6245D002CD95A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B07762F16B6245D002CD95A /* main.m */; };
-		1B07763416B6245D002CD95A /* HomepwnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B07763316B6245D002CD95A /* HomepwnAppDelegate.m */; };
+		1B07763416B6245D002CD95A /* HomepwnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B07763316B6245D002CD95A /* HomepwnAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B07763616B6245D002CD95A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B07763516B6245D002CD95A /* Default.png */; };
 		1B07763816B6245D002CD95A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B07763716B6245D002CD95A /* Default@2x.png */; };
 		1B07763A16B6245D002CD95A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B07763916B6245D002CD95A /* Default-568h@2x.png */; };
 		1B07764216B6255E002CD95A /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B07764116B6255E002CD95A /* ItemsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B07764716B62803002CD95A /* PossessionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B07764616B62803002CD95A /* PossessionStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1B31955F16B8066000D49687 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B31955E16B8066000D49687 /* CoreData.framework */; };
+		1B31956316B807E500D49687 /* Homepwner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B31956116B807E500D49687 /* Homepwner.xcdatamodeld */; };
+		1B31956916B80D9800D49687 /* Possession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B31956816B80D9800D49687 /* Possession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1B31956C16B830FD00D49687 /* AssetTypePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B31956B16B830FD00D49687 /* AssetTypePicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B6AAE5916B75BEF003C54C2 /* FileHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAE5816B75BEF003C54C2 /* FileHelpers.m */; };
 		1B6AAE8316B77C6D003C54C2 /* HomepwnerItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6AAE8216B77C6D003C54C2 /* HomepwnerItemCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B02C27016B62D41007D754C /* Possession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Possession.h; sourceTree = "<group>"; };
-		1B02C27116B62D41007D754C /* Possession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Possession.m; sourceTree = "<group>"; };
 		1B02C27316B6B2F0007D754C /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		1B02C27516B6F4F3007D754C /* ItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDetailViewController.h; sourceTree = "<group>"; };
 		1B02C27616B6F4F3007D754C /* ItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDetailViewController.m; sourceTree = "<group>"; };
@@ -71,6 +72,12 @@
 		1B07764116B6255E002CD95A /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
 		1B07764516B62803002CD95A /* PossessionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PossessionStore.h; sourceTree = "<group>"; };
 		1B07764616B62803002CD95A /* PossessionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PossessionStore.m; sourceTree = "<group>"; };
+		1B31955E16B8066000D49687 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1B31956216B807E500D49687 /* Homepwner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Homepwner.xcdatamodel; sourceTree = "<group>"; };
+		1B31956716B80D9800D49687 /* Possession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Possession.h; sourceTree = "<group>"; };
+		1B31956816B80D9800D49687 /* Possession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Possession.m; sourceTree = "<group>"; };
+		1B31956A16B830FD00D49687 /* AssetTypePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetTypePicker.h; sourceTree = "<group>"; };
+		1B31956B16B830FD00D49687 /* AssetTypePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetTypePicker.m; sourceTree = "<group>"; };
 		1B6AAE5716B75BEF003C54C2 /* FileHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileHelpers.h; path = ../FileHelpers.h; sourceTree = "<group>"; };
 		1B6AAE5816B75BEF003C54C2 /* FileHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileHelpers.m; path = ../FileHelpers.m; sourceTree = "<group>"; };
 		1B6AAE8116B77C6D003C54C2 /* HomepwnerItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepwnerItemCell.h; sourceTree = "<group>"; };
@@ -82,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B31955F16B8066000D49687 /* CoreData.framework in Frameworks */,
 				1B07762416B6245D002CD95A /* UIKit.framework in Frameworks */,
 				1B07762616B6245D002CD95A /* Foundation.framework in Frameworks */,
 				1B07762816B6245D002CD95A /* CoreGraphics.framework in Frameworks */,
@@ -94,6 +102,7 @@
 		1B07761416B6245D002CD95A = {
 			isa = PBXGroup;
 			children = (
+				1B31955E16B8066000D49687 /* CoreData.framework */,
 				1B02C29116B73D71007D754C /* Default@2x.png */,
 				1B02C28F16B73B51007D754C /* Pwner_114x114.png */,
 				1B02C28D16B73B3C007D754C /* Default.png */,
@@ -130,10 +139,9 @@
 		1B07762916B6245D002CD95A /* Homepwner */ = {
 			isa = PBXGroup;
 			children = (
+				1B31956116B807E500D49687 /* Homepwner.xcdatamodeld */,
 				1B6AAE5716B75BEF003C54C2 /* FileHelpers.h */,
 				1B6AAE5816B75BEF003C54C2 /* FileHelpers.m */,
-				1B02C27016B62D41007D754C /* Possession.h */,
-				1B02C27116B62D41007D754C /* Possession.m */,
 				1B07763216B6245D002CD95A /* HomepwnAppDelegate.h */,
 				1B07763316B6245D002CD95A /* HomepwnAppDelegate.m */,
 				1B07762A16B6245D002CD95A /* Supporting Files */,
@@ -149,6 +157,10 @@
 				1B02C27B16B70FAC007D754C /* ImageStore.m */,
 				1B6AAE8116B77C6D003C54C2 /* HomepwnerItemCell.h */,
 				1B6AAE8216B77C6D003C54C2 /* HomepwnerItemCell.m */,
+				1B31956716B80D9800D49687 /* Possession.h */,
+				1B31956816B80D9800D49687 /* Possession.m */,
+				1B31956A16B830FD00D49687 /* AssetTypePicker.h */,
+				1B31956B16B830FD00D49687 /* AssetTypePicker.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -248,11 +260,13 @@
 				1B07763416B6245D002CD95A /* HomepwnAppDelegate.m in Sources */,
 				1B07764216B6255E002CD95A /* ItemsViewController.m in Sources */,
 				1B07764716B62803002CD95A /* PossessionStore.m in Sources */,
-				1B02C27216B62D41007D754C /* Possession.m in Sources */,
 				1B02C27816B6F4F3007D754C /* ItemDetailViewController.m in Sources */,
 				1B02C27C16B70FAC007D754C /* ImageStore.m in Sources */,
 				1B6AAE5916B75BEF003C54C2 /* FileHelpers.m in Sources */,
 				1B6AAE8316B77C6D003C54C2 /* HomepwnerItemCell.m in Sources */,
+				1B31956316B807E500D49687 /* Homepwner.xcdatamodeld in Sources */,
+				1B31956916B80D9800D49687 /* Possession.m in Sources */,
+				1B31956C16B830FD00D49687 /* AssetTypePicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +382,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1B31956116B807E500D49687 /* Homepwner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1B31956216B807E500D49687 /* Homepwner.xcdatamodel */,
+			);
+			currentVersion = 1B31956216B807E500D49687 /* Homepwner.xcdatamodel */;
+			path = Homepwner.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1B07761616B6245D002CD95A /* Project object */;
 }

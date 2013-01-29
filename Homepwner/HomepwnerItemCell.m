@@ -103,7 +103,7 @@
 {
     // Using a Possession instance, we can set the values of the subviews
     [valueLabel setText:
-        [NSString stringWithFormat:@"$%d", [possession valueInDollars]]];
+        [NSString stringWithFormat:@"$%@", [possession valueInDollars]]];
     [nameLabel setText:[possession possessionName]];
     
     // use this thumbnail to set the imageView of the cells when they are configured

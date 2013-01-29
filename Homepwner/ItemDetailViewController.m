@@ -10,6 +10,7 @@
 #import "Possession.h"
 #import "ImageStore.h"
 #import "PossessionStore.h"
+#import "AssetTypePicker.h"
 
 @implementation ItemDetailViewController
 
@@ -43,10 +44,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [nameField setText:[possession possessionName]];
     [serialNumberField setText:[possession serialNumber]];
-    [valueField setText:[NSString stringWithFormat:@"%d",
-                         [possession valueInDollars]]];
+    
+    // When we moved Possession to a subclass of NSManagedObject, the valueInDollars
+    // property became an instance of NSNumber instead of an int.
+    if([possession valueInDollars])
+    {
+        // Notice that the format string changed
+        [valueField setText:[NSString stringWithFormat:@"%@",
+                             [possession valueInDollars]]];
+    } else {
+        [valueField setText:@"0"];
+    }
     
     // Create a NSDateFormatter that will turn a date into a simple date string
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -75,6 +86,14 @@
         // Clear the imageView
         [imageView setImage:nil];
     }
+    
+    // Update the title of the button to show the asset type of a Possession.
+    NSString *typeLabel = [[possession assetType] valueForKey:@"label"];
+    if (!typeLabel)
+        typeLabel = @"None";
+    
+        [assetTypeButton setTitle:[NSString stringWithFormat:@"Type: %@", typeLabel]
+                         forState:UIControlStateNormal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -87,7 +106,8 @@
     // "Save" changes to possession
     [possession setPossessionName:[nameField text]];
     [possession setSerialNumber:[serialNumberField text]];
-    [possession setValueInDollars:[[valueField text] intValue]];
+    NSNumber *valueNum = [NSNumber numberWithInt:[[valueField text] intValue]];
+    [possession setValueInDollars:valueNum];
 }
 
 - (IBAction)takePicture:(id)sender {
@@ -270,6 +290,17 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     if([delegate respondsToSelector:@selector(itemDetailViewControllerWillDismiss:)])
         [delegate itemDetailViewControllerWillDismiss:self];
+}
+
+- (IBAction)showAssetTypePicker:(id)sender
+{
+    [[self view] endEditing:YES];
+    
+    AssetTypePicker *assetTypePicker = [[[AssetTypePicker alloc] init] autorelease];
+    [assetTypePicker setPossession:possession];
+    
+    [[self navigationController] pushViewController:assetTypePicker animated:YES];
+
 }
 
 @end

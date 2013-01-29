@@ -25,6 +25,8 @@
     IBOutlet UITextField *valueField;
     IBOutlet UILabel *dateLabel;
 
+    __weak IBOutlet UIButton *assetTypeButton;
+    
     IBOutlet UIImageView *imageView;
     
     Possession *possession;
@@ -40,7 +42,7 @@
 - (id)initForNewItem:(BOOL)isNew;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)backgroundTapped:(id)sender;
-
+- (IBAction)showAssetTypePicker:(id)sender;
 
 
 @end
