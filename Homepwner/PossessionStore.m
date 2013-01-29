@@ -8,6 +8,7 @@
 
 #import "PossessionStore.h"
 #import "Possession.h"
+#import "ImageStore.h"
 
 // When defaultStore message is sent to the PossessionStore class, the class
 // will check to see if the instance of PossessionStore has already been
@@ -51,14 +52,20 @@ static PossessionStore *defaultStore = nil;
     
     return self;
 }
-
+    
 - (NSArray *)allPossessions
 {
+    // This ensures allPossessions is created
+    [self fetchPossessionsIfNecessary];
+    
     return allPossessions;
 }
 
 - (Possession *)createPossession
 {
+    // This ensures allPossessions is created
+    [self fetchPossessionsIfNecessary];
+    
     Possession *p = [Possession randomPossession];
     [allPossessions addObject:p];
     return p;
@@ -66,6 +73,11 @@ static PossessionStore *defaultStore = nil;
 
 - (void)removePossession:(Possession *)p
 {
+    // When a Possession is removed from the store, its image should also be
+    // removed from the filesystem.
+    NSString *key = [p imageKey];
+    [[ImageStore defaultImageStore] deleteImageForKey:key];
+    
     [allPossessions removeObjectIdenticalTo:p];
 }
 
@@ -85,5 +97,39 @@ static PossessionStore *defaultStore = nil;
 
 }
 
+- (NSString *)possessionArchivePath
+{
+    // The returned path will be Sandbox/Documents/possessions.data
+    // Both the saving and loading methods will call this method to get the same path,
+    // preventing a typo in the path name of either method
+    return pathInDocumentDirectory(@"possessions.data");
+}
+
+
+// The archiveRootObject:toFile: method creates an instance of NSKeyedArchiver and
+// then sends encodeWithCoder: to allPossessions. The NSKeyedArchiver is passed as
+// the argument. When an array is archived, all of its contents are archived along
+// with it (as long as those contents conform to NSCoding), so passing an array full
+// of Possession instances to archiveRootObject:toFile: kicks off a chain reaction of
+// encoding.
+- (BOOL)saveChanges
+{
+    // returns success or failure
+    return [NSKeyedArchiver archiveRootObject:allPossessions
+                                       toFile:[self possessionArchivePath]];
+}
+
+- (void)fetchPossessionsIfNecessary
+{
+    // If we don't currently have an allPossessions array, try to read one from disk
+    if (!allPossessions) {
+        NSString *path = [self possessionArchivePath];
+        allPossessions = [[NSKeyedUnarchiver unarchiveObjectWithFile:path] retain];
+    }
+    // If we tried to read one from disk but does not exist, then create a new one
+    if (!allPossessions) {
+        allPossessions = [[NSMutableArray alloc] init];
+    }
+}
 
 @end

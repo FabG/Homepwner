@@ -29,4 +29,11 @@
 - (void)movePossessionAtIndex:(int)from
                       toIndex:(int)to;
 
+// specifies the name of the file on the filesystem that contains the data for all of the Possessions
+- (NSString *)possessionArchivePath;
+
+
+- (BOOL)saveChanges;                    // archiving
+- (void)fetchPossessionsIfNecessary;    //unarchiving
+
 @end

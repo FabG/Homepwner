@@ -8,6 +8,7 @@
 
 #import "HomepwnAppDelegate.h"
 #import "ItemsViewController.h"
+#import "PossessionStore.h"
 
 @implementation HomepwnAppDelegate
 
@@ -44,8 +45,9 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    //  implement applicationDidEnterBackground: so that it tells the
+    // PossessionStore to save its data to the filesystem.
+    [[PossessionStore defaultStore] saveChanges];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -61,6 +63,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // To support pre-iOS 4 devices, saving changes there too
+    [[PossessionStore defaultStore] saveChanges];
 }
+
+
 
 @end

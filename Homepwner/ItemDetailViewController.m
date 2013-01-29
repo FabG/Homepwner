@@ -173,7 +173,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     CFUUIDCreateString (kCFAllocatorDefault, newUniqueID);
     
     // Use that unique ID to set our possessions imageKey
-    [possession setImageKey:(__bridge NSString *)newUniqueIDString];
+    [possession setImageKey:( NSString *)newUniqueIDString];
     
     // We used "Create" in the functions to make objects, we need to release them
     CFRelease(newUniqueIDString);

@@ -134,4 +134,38 @@
     return newPossession;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    // For each instance variable, archive it under its variable name
+    // These objects will also be sent encodeWithCoder:
+    [encoder encodeObject:possessionName forKey:@"possessionName"];
+    [encoder encodeObject:serialNumber forKey:@"serialNumber"];
+    
+    [encoder encodeObject:dateCreated forKey:@"dateCreated"];
+    [encoder encodeObject:imageKey forKey:@"imageKey"];
+    
+    // For the primitive valueInDollars, make sure to use encodeInt:forKey:
+    // the value in valueInDollars will be placed in the coder object
+    [encoder encodeInt:valueInDollars forKey:@"valueInDollars"];
+}
+
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        // For each instance variable that is archived, we decode it,
+        // and pass it to our setters. (Where it is retained)
+        [self setPossessionName:[decoder decodeObjectForKey:@"possessionName"]];
+        [self setSerialNumber:[decoder decodeObjectForKey:@"serialNumber"]];
+        [self setImageKey:[decoder decodeObjectForKey:@"imageKey"]];
+        // Make sure to use decodeIntForKey:, since valueInDollars is not an object
+        [self setValueInDollars:[decoder decodeIntForKey:@"valueInDollars"]];
+        // dateCreated is read only, we have no setter. We explicitly
+        // retain it and set our instance variable pointer to it
+        dateCreated = [[decoder decodeObjectForKey:@"dateCreated"] retain];
+    }
+    return self;
+}
+
 @end
